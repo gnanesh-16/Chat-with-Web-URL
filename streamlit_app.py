@@ -94,13 +94,15 @@ else:
     st.session_state.chat_history.append(HumanMessage(content=user_query))
     st.session_state.chat_history.append(AIMessage(content=response))
 
-  # Conversation
+    # Conversation
   for message in st.session_state.chat_history:
     if isinstance(message, AIMessage):
-      with st.chat_message("AI"):
+      with st.chat_message("AI"):  # Added closing parenthesis
         st.write(message.content)
     elif isinstance(message, HumanMessage):
-      with st.chat_message
+      with st.chat_message("User"):  # Added closing parenthesis and "User" argument
+        st.write(message.content)
+
 
 
 ##############worked small error ok respone_done
