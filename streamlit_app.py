@@ -31,7 +31,8 @@ def get_vectorstore_from_url(url):
             'https://api.gemini.com/v1/embeddings',  # Hypothetical endpoint
             headers=headers,
             # json={'text': chunk['content']}
-              json={'text': chunk.content}
+            # json={'text': chunk.content}
+              json={'text': chunk}
         )
         response_data = response.json()
         document_embeddings.append(response_data['embedding'])
