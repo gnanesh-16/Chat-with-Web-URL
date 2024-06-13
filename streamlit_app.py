@@ -25,14 +25,33 @@ def get_vectorstore_from_url(url):
     document_chunks = text_splitter.split_documents(document)
 
     # Get embeddings for each chunk
+    # document_embeddings = []
+    # for chunk in document_chunks:
+    #     response = requests.post(
+    #         'https://api.gemini.com/v1/embeddings',  # Hypothetical endpoint
+    #         headers=headers,
+    #         # json={'text': chunk['content']}
+    #         # json={'text': chunk.content}
+    #           json={'text': chunk}
+    #     )
+    #     response_data = response.json()
+    #     document_embeddings.append(response_data['embedding'])
+    def get_vectorstore_from_url(url):
+    loader = WebBaseLoader(url)
+    document = loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter()
+    document_chunks = text_splitter.split_documents(document)
+
+    # Get embeddings for each chunk
     document_embeddings = []
     for chunk in document_chunks:
+        # Assuming chunk is already text data itself or can be processed further
+        text_content = chunk['content']  # Adjust based on actual structure of chunk
         response = requests.post(
             'https://api.gemini.com/v1/embeddings',  # Hypothetical endpoint
             headers=headers,
-            # json={'text': chunk['content']}
-            # json={'text': chunk.content}
-              json={'text': chunk}
+            json={'text': text_content}  # Pass text content for embedding generation
         )
         response_data = response.json()
         document_embeddings.append(response_data['embedding'])
