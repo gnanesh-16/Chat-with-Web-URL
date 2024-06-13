@@ -17,12 +17,12 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-def get_vectorstore_from_url(url):
-    loader = WebBaseLoader(url)
-    document = loader.load()
+# def get_vectorstore_from_url(url):
+#     loader = WebBaseLoader(url)
+#     document = loader.load()
 
-    text_splitter = RecursiveCharacterTextSplitter()
-    document_chunks = text_splitter.split_documents(document)
+#     text_splitter = RecursiveCharacterTextSplitter()
+#     document_chunks = text_splitter.split_documents(document)
 
     # Get embeddings for each chunk
     # document_embeddings = []
@@ -36,7 +36,7 @@ def get_vectorstore_from_url(url):
     #     )
     #     response_data = response.json()
     #     document_embeddings.append(response_data['embedding'])
-    def get_vectorstore_from_url(url):
+def get_vectorstore_from_url(url):
     loader = WebBaseLoader(url)
     document = loader.load()
 
@@ -54,7 +54,7 @@ def get_vectorstore_from_url(url):
             json={'text': text_content}  # Pass text content for embedding generation
         )
         response_data = response.json()
-        document_embeddings.append(response_data['embedding'])
+        document_embeddings.append(response_data['embedding'])   
 
     # Create vector store from embeddings
     vector_store = Chroma.from_documents(document_chunks, document_embeddings)
