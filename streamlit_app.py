@@ -47,7 +47,7 @@ def get_vectorstore_from_url(url):
     document_embeddings = []
     for chunk in document_chunks:
         # Process chunk to extract text content appropriately
-        text_content = chunk.content  # Assuming chunk provides content directly
+        text_content = chunk.text  # Adjust based on actual structure of chunk
         response = requests.post(
             'https://api.gemini.com/v1/embeddings',  # Hypothetical endpoint
             headers=headers,
@@ -59,6 +59,7 @@ def get_vectorstore_from_url(url):
     # Create vector store from embeddings
     vector_store = Chroma.from_documents(document_chunks, document_embeddings)
     return vector_store
+    
 
 def get_context_retriever_chain(vector_store):
     def retriever(prompt):
