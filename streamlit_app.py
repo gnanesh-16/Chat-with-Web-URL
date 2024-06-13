@@ -46,15 +46,15 @@ def get_vectorstore_from_url(url):
     # Get embeddings for each chunk
     document_embeddings = []
     for chunk in document_chunks:
-        # Assuming chunk is already text data itself or can be processed further
-        text_content = chunk['content']  # Adjust based on actual structure of chunk
+        # Process chunk to extract text content appropriately
+        text_content = chunk.content  # Assuming chunk provides content directly
         response = requests.post(
             'https://api.gemini.com/v1/embeddings',  # Hypothetical endpoint
             headers=headers,
             json={'text': text_content}  # Pass text content for embedding generation
         )
         response_data = response.json()
-        document_embeddings.append(response_data['embedding'])   
+        document_embeddings.append(response_data['embedding'])
 
     # Create vector store from embeddings
     vector_store = Chroma.from_documents(document_chunks, document_embeddings)
